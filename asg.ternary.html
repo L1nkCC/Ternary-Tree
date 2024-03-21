@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0068)https://www.cs.uky.edu/~raphael/courses/CS315/prog2/asg.ternary.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style> code {font-size: 15px; color: blue;} </style>
+<title></title></head><body>
+<div style="text-align:center;"><h1>Programming Assignment:  Ternary Trees</h1></div>
+<h2>1. The problem</h2>
+<p>
+Generalize the idea of binary trees.
+First, consider <b>unary</b> trees: Each node has at most one child.
+Unfortunately, unary trees are just linked lists.  Next, consider <b>ternary</b>
+trees.  After all, if binary trees are enormously better than unary,
+certainly ternary will be better still!
+</p><p>
+Each node in a non-empty ternary tree is allowed to have either 1 or 2
+values.  If a node has 2 values, say <i>a</i> &lt; <i>b</i>, then it is easy to use
+them to choose among three directions to descend below that node given
+a probe value <i>p</i>.
+There are three possibilities: <i>p</i> ≤ <i>a</i>, <i>a</i> &lt; <i>p</i> ≤
+<i>b</i>, <i>b</i> &lt; <i>p</i>.
+But what if a node only has 1 value, say <i>a</i>?  If you are inserting
+<i>p</i>, make <i>p</i> the other value, making sure that you sort the two values
+with the lower one first.  In other words, only two-valued nodes can have
+children.
+</p><p>
+To test this idea, write a program called <code>ternary</code> that takes <i>n</i> as a
+parameter, reads in <i>n</i> integers (one per line; there may be duplicates),
+inserts them into an initially empty ternary tree, and then prints the tree in
+symmetric order (inorder), with parentheses showing the children of a node.
+That is, if a node contains values <i>a</i> and <i>b</i>, print it as
+</p><pre>(left child) a (middle child) b (right child)
+</pre>
+If any child is empty, just leave out the parentheses.
+For instance,
+if I insert the following 20 integers into an initially empty ternary tree:
+<pre>4 6 4 18 8 2 14 7 15 5 19 12 15 5 9 0 17 2 2 19 
+</pre>
+the output is
+<pre>((0 (2) 2) 2 4) 4 (5 5) 6 ((7) 8 ((9 12) 14 (15) 15 (17)) 18 (19 19))
+</pre>
+<h2>2. What to hand in</h2>
+<p>
+Hand in a copy of your program and its output
+when run as follows:
+</p><pre>&nbsp;	randGen.pl 49 10000 | ternary 1000
+</pre>
+<h2>3. Useful tools</h2>
+<p>
+You have access to some useful tools.  First, there is a sample
+<code>Makefile</code> at
+<code><a href="http://www.cs.uky.edu/~raphael/courses/CS315/prog2/Makefile">http://www.cs.uky.edu/~raphael/courses/CS315/prog2/Makefile</a></code>.
+It has a <i>run</i> target that compiles the program (either <code>ternary.c</code> or
+<code>ternary.cpp</code>) and runs it.  Feel free to modify <code>Makefile</code>.
+</p><p>
+Second, you have the <code>randGen.pl</code> program from before.
+It takes two parameters; a randomizing seed and a value that limits the size of
+its outputs.
+</p><p>
+Third, there is a working version of the program at
+<code><a href="http://www.cs.uky.edu/~raphael/courses/CS315/prog2/workingTernary">http://www.cs.uky.edu/~raphael/courses/CS315/prog2/workingTernary</a></code>.
+</p><h2>4. Extra credit ideas</h2>
+<ol>
+<li>
+
+Compute statistics for large randomly built ternary trees to estimate the
+function relating number of elements in the tree to the average
+depth of a node in the tree.  The function ought to be no worse than
+logarithmic, but is
+it better than the equivalent function for binary trees?
+</li><li>
+
+Experimentally compare the time and space required to build a ternary
+versus a binary tree on a large list of randomly generated values.
+</li><li>
+
+Build a sorting routine that uses your ternary-tree insertion code as a
+subroutine.
+</li><li>
+
+Build a search routine that takes a probe value <i>p</i> and looks for it in a
+ternary tree.
+</li><li>
+
+(Hard) Derive a formula for the number of ternary trees with <i>n</i> values.
+</li><li>
+
+Generalize the program so it takes another parameter indicating the <i>arity</i>
+of the tree; 2 means binary, 3 means ternary, 4 means quaternary, and so forth.
+</li></ol>
+
+</body></html>
